@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R9EW10BJGW"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-R9EW10BJGW');</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Grammar Checker & Text Rewriter – Free, No API Key, Offline</title>
+<meta name="description" content="Free AI grammar checker and text rewriter. Runs entirely in your browser using Transformers.js — no API key, no upload, works offline. Fix grammar, rewrite content, simplify text.">
+<link rel="canonical" href="https://nxtcraft.github.io/ai-grammar/">
+<meta property="og:title" content="AI Grammar Checker & Rewriter — Free, No API Key">
+<meta property="og:description" content="Fix grammar and rewrite text with AI. Runs 100% in your browser — no API key, no data uploaded, works offline.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nxtcraft.github.io/ai-grammar/">
+<link rel="manifest" href="/ai-grammar/manifest.json">
+<meta name="theme-color" content="#7c3aed">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#0d0d1a;color:#e2e8f0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh}
+nav{background:#13132a;border-bottom:1px solid #2d2460;height:50px;display:flex;align-items:center;padding:0 1.5rem;gap:1rem}
+.brand{font-weight:800;color:#a78bfa}
+.nav-links{margin-left:auto}.nav-links a{color:#64748b;font-size:.85rem;text-decoration:none}
+main{max-width:900px;margin:0 auto;padding:1.5rem}
+h1{font-size:1.5rem;font-weight:800;margin-bottom:.3rem}
+.sub{color:#94a3b8;font-size:.9rem;margin-bottom:1.5rem}
+.ai-badge{display:inline-flex;align-items:center;gap:.35rem;background:#2d1b4e;color:#c084fc;padding:.2rem .65rem;border-radius:20px;font-size:.75rem;font-weight:700;margin-bottom:1rem}
+.mode-tabs{display:flex;gap:.4rem;margin-bottom:1rem;flex-wrap:wrap}
+.mode-tab{padding:.4rem 1rem;border-radius:20px;border:1.5px solid #2d2460;cursor:pointer;font-size:.82rem;font-weight:600;color:#64748b;transition:all .15s}
+.mode-tab.active{background:#7c3aed;color:#fff;border-color:#7c3aed}
+.editor-layout{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:650px){.editor-layout{grid-template-columns:1fr}}
+.editor-box{background:#13132a;border:1.5px solid #2d2460;border-radius:12px;padding:1rem;display:flex;flex-direction:column}
+.editor-label{font-size:.78rem;font-weight:700;color:#7c3aed;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.5rem}
+textarea{flex:1;background:transparent;border:none;color:#e2e8f0;font-size:.9rem;line-height:1.6;resize:none;outline:none;min-height:220px}
+.char-count{font-size:.75rem;color:#475569;margin-top:.4rem;text-align:right}
+.btn-row{display:flex;gap:.5rem;margin:1rem 0;flex-wrap:wrap;align-items:center}
+.btn{padding:.55rem 1.2rem;border-radius:9px;border:none;cursor:pointer;font-size:.88rem;font-weight:700;transition:all .2s}
+.btn-ai{background:#7c3aed;color:#fff}
+.btn-ai:hover{background:#6d28d9}
+.btn-ai:disabled{background:#3730a3;color:#818cf8;cursor:not-allowed}
+.btn-copy{background:#1e1b2e;border:1px solid #2d2460;color:#a78bfa}
+.btn-copy:hover{background:#2d2460}
+.btn-clear{background:#1e1b2e;border:1px solid #2d2460;color:#64748b}
+.status-bar{background:#1e1b2e;border:1px solid #2d2460;border-radius:8px;padding:.6rem 1rem;font-size:.82rem;color:#94a3b8;margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem}
+.status-bar.loading{color:#a78bfa}
+.status-bar.done{color:#4ade80;border-color:#14532d;background:#0f2a1f}
+.status-bar.error{color:#f87171;border-color:#450a0a;background:#2d0a0a}
+.spinner{width:14px;height:14px;border:2px solid #4c1d95;border-top-color:#a78bfa;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+.diff-added{background:#14532d;color:#4ade80;border-radius:2px}
+.diff-removed{background:#450a0a;color:#f87171;text-decoration:line-through;border-radius:2px}
+.result-html{background:transparent;font-size:.9rem;line-height:1.6;min-height:220px;white-space:pre-wrap;word-break:break-word}
+.model-info{background:#1e1b2e;border:1px solid #2d2460;border-radius:8px;padding:.75rem;font-size:.82rem;color:#64748b;margin-top:1rem;line-height:1.6}
+.progress-wrap{margin:4px 0 2px}
+.progress-bar{height:4px;background:#1e1b2e;border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:#7c3aed;border-radius:3px;transition:width .3s}
+footer{text-align:center;padding:1.5rem;color:#334155;font-size:.78rem;margin-top:2rem;border-top:1px solid #1e1b2e}
+</style>
+</head>
+<body>
+<nav>
+  <span class="brand">✨ AI Grammar</span>
+  <div class="nav-links"><a href="https://nxtcraft.github.io/">All Tools</a></div>
+</nav>
+<main>
+  <h1>AI Grammar Checker & Rewriter</h1>
+  <p class="sub">Fix grammar, rewrite, simplify or formalize text using AI. Runs 100% in your browser — no API key, no data uploaded.</p>
+  <div class="ai-badge">🤖 Powered by Transformers.js · On-device AI · No API Key</div>
+
+  <div class="mode-tabs">
+    <div class="mode-tab active" onclick="setMode('grammar',this)">📝 Fix Grammar</div>
+    <div class="mode-tab" onclick="setMode('rewrite',this)">✍️ Rewrite</div>
+    <div class="mode-tab" onclick="setMode('simplify',this)">🔽 Simplify</div>
+    <div class="mode-tab" onclick="setMode('formal',this)">🎩 Make Formal</div>
+    <div class="mode-tab" onclick="setMode('casual',this)">😊 Make Casual</div>
+    <div class="mode-tab" onclick="setMode('summarize',this)">📋 Summarize</div>
+  </div>
+
+  <div class="status-bar" id="status-bar">
+    <span>🤖 AI model loads on first use (~60-120MB, cached after). Click "Run AI" to start.</span>
+  </div>
+
+  <div class="editor-layout">
+    <div class="editor-box">
+      <div class="editor-label">Your Text</div>
+      <textarea id="input-text" placeholder="Paste or type your text here…&#10;&#10;Example: 'i went to store yesterday and buyed some milk its very fresh'"></textarea>
+      <div class="char-count" id="char-count">0 characters</div>
+    </div>
+    <div class="editor-box">
+      <div class="editor-label" id="output-label">AI Output</div>
+      <div class="result-html" id="output-text">AI output will appear here after processing.</div>
+      <div class="char-count" id="out-char-count"></div>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-ai" id="run-btn" onclick="runAI()">🚀 Run AI</button>
+    <button class="btn btn-copy" onclick="copyOutput()">📋 Copy Output</button>
+    <button class="btn btn-clear" onclick="clearAll()">🗑 Clear</button>
+    <div id="copy-ok" style="color:#4ade80;font-size:.82rem;font-weight:600;display:none">✓ Copied!</div>
+  </div>
+
+  <div class="model-info">
+    <strong style="color:#a78bfa">How it works:</strong> Uses <code>Xenova/flan-t5-small</code> model from Hugging Face, running directly in your browser via Transformers.js WebAssembly. The model (~60MB) downloads once and is cached by your browser. <strong>Your text never leaves your device.</strong>
+    <div style="margin-top:.4rem;color:#94a3b8">Model: flan-t5-small · ~60MB · Cached after first use · Works offline after first load</div>
+  </div>
+</main>
+<footer><p>AI Grammar & Rewriter by <a href="https://nxtcraft.github.io/" style="color:#a78bfa">NxtCraft</a> · On-device AI, no API key needed.</p></footer>
+
+<script type="module">
+import { pipeline, env } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2/dist/transformers.min.js';
+env.allowRemoteModels = true;
+
+let pipe = null;
+let currentMode = 'grammar';
+let isLoading = false;
+
+const PROMPTS = {
+  grammar: t => `Fix grammar and spelling mistakes in this text. Keep the meaning the same. Only correct errors:\n\n${t}`,
+  rewrite: t => `Rewrite this text to make it clearer and better written, keeping the same meaning:\n\n${t}`,
+  simplify: t => `Simplify this text using simple words and short sentences:\n\n${t}`,
+  formal: t => `Rewrite this text in a formal, professional tone:\n\n${t}`,
+  casual: t => `Rewrite this text in a friendly, casual conversational tone:\n\n${t}`,
+  summarize: t => `Summarize this text in 2-3 concise sentences:\n\n${t}`,
+};
+
+const OUTPUT_LABELS = {
+  grammar: 'Grammar Corrected',
+  rewrite: 'Rewritten Text',
+  simplify: 'Simplified Text',
+  formal: 'Formal Version',
+  casual: 'Casual Version',
+  summarize: 'Summary',
+};
+
+window.setMode = function(mode, el) {
+  currentMode = mode;
+  document.querySelectorAll('.mode-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('output-label').textContent = OUTPUT_LABELS[mode];
+};
+
+document.getElementById('input-text').addEventListener('input', function() {
+  document.getElementById('char-count').textContent = this.value.length + ' characters';
+});
+
+async function loadModel() {
+  if (pipe) return;
+  setStatus('loading', '⏳ Loading AI model (first time ~60MB, then cached)…');
+  try {
+    pipe = await pipeline('text2text-generation', 'Xenova/flan-t5-small', {
+      progress_callback: (p) => {
+        if (p.status === 'downloading') {
+          const pct = p.total ? Math.round(p.loaded/p.total*100) : 0;
+          setStatus('loading', `⏳ Downloading model: ${pct}% (${((p.loaded||0)/1024/1024).toFixed(1)}MB / ${((p.total||0)/1024/1024).toFixed(1)}MB)`);
+        }
+      }
+    });
+    setStatus('done', '✅ AI model loaded. Ready to use!');
+  } catch(e) {
+    setStatus('error', '❌ Failed to load model: ' + e.message);
+    pipe = null;
+    throw e;
+  }
+}
+
+window.runAI = async function() {
+  const text = document.getElementById('input-text').value.trim();
+  if (!text) { alert('Please enter some text first.'); return; }
+  if (isLoading) return;
+  isLoading = true;
+  document.getElementById('run-btn').disabled = true;
+
+  try {
+    await loadModel();
+    setStatus('loading', '🤖 Processing your text…');
+    const prompt = PROMPTS[currentMode](text);
+    const result = await pipe(prompt, {
+      max_new_tokens: 300,
+      do_sample: false,
+    });
+    const output = result[0].generated_text;
+    document.getElementById('output-text').textContent = output;
+    document.getElementById('out-char-count').textContent = output.length + ' characters';
+    setStatus('done', '✅ Done! Copy or edit the output above.');
+  } catch(e) {
+    if (e.message !== 'Failed to load model: ' + e.message) {
+      setStatus('error', '❌ Error: ' + e.message);
+    }
+  } finally {
+    isLoading = false;
+    document.getElementById('run-btn').disabled = false;
+  }
+};
+
+window.copyOutput = function() {
+  const text = document.getElementById('output-text').textContent;
+  if (!text || text === 'AI output will appear here after processing.') return;
+  navigator.clipboard.writeText(text).then(()=>{
+    const ok = document.getElementById('copy-ok');
+    ok.style.display='inline'; setTimeout(()=>ok.style.display='none', 2000);
+  });
+};
+
+window.clearAll = function() {
+  document.getElementById('input-text').value = '';
+  document.getElementById('output-text').textContent = 'AI output will appear here after processing.';
+  document.getElementById('char-count').textContent = '0 characters';
+  document.getElementById('out-char-count').textContent = '';
+};
+
+function setStatus(type, msg) {
+  const bar = document.getElementById('status-bar');
+  bar.className = 'status-bar ' + type;
+  bar.innerHTML = type === 'loading' ? `<div class="spinner"></div>${msg}` : msg;
+}
+</script>
+<script>if('serviceWorker'in navigator)navigator.serviceWorker.register('/ai-grammar/sw.js');</script>
+</body>
+</html>
